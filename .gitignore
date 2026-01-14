@@ -1,0 +1,23 @@
+# --- Python & PyCharm ---
+__pycache__/
+*.py[cod]
+.idea/
+venv/
+.env
+
+# --- TITAN Project Specific (Tego nie wysyłamy!) ---
+# Dane wejściowe (CSV są za duże i mogą być prywatne)
+dataset/
+*.csv
+
+# Logi treningowe (zajmują dużo miejsca)
+titan_logs/
+
+# Zapisane modele (pliki binarne, bardzo ciężkie)
+titan_models/
+*.zip
+*.pth
+
+# Wykresy i inne śmieci
+*.png
+*.jpg
