@@ -3,7 +3,7 @@ Titan is an advanced, experimental stock scanning system designed for the S&P 50
 
 Key Features:
 
-Tri-Fusion Data System: Merges technical analysis, fundamental statistics, and quarterly/yearly growth metrics into a unified dataset for the model.
+Tri-Fusion Data System: Merges technical analysis, fundamental statistics, and quarterly/yearly growth metrics into a unified dataset prepared by myself.
 
 Decision Engine: Powered by the Proximal Policy Optimization (PPO) algorithm via Stable Baselines3.
 
