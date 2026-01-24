@@ -4,7 +4,7 @@ import warnings
 from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.callbacks import CheckpointCallback
-from stable_baselines3.common.monitor import Monitor  # <--- NOWOŚĆ: KLUCZOWY IMPORT
+from stable_baselines3.common.monitor import Monitor
 
 # --- IMPORTY Z TWOICH FOLDERÓW ---
 from ARENA.titan_env import TitanGymEnv
@@ -25,33 +25,38 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 
 
 def main():
-    print("🚀 INICJALIZACJA SYSTEMU TITAN (Z MONITOREM)...")
+    print("🚀 INICJALIZACJA SYSTEMU TITAN (ZOMBIE FIX)...")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"🔥 Urządzenie: {device.upper()}")
     if device == "cuda":
         print(f"   Karta: {torch.cuda.get_device_name(0)}")
 
-    print("🏟️ Tworzenie Areny...")
+    print("🏟️ Tworzenie Areny (New Reward System)...")
 
-    # --- TU JEST ZMIANA: DODANO MONITOR ---
-    # Monitor sprawia, że TensorBoard widzi nagrody (rollout/ep_rew_mean)
+    # Tworzenie środowiska z Monitorem
     env = DummyVecEnv([lambda: Monitor(TitanGymEnv(AI_FILE, GROWTH_FILE, PRICE_FILE))])
 
-    print("🧠 Budowanie modelu...")
+    print("🧠 Budowanie modelu (High Entropy)...")
 
+    # HIPERPARAMETRY DO STROJENIA (Zgodnie z planem ratunkowym)
     model = PPO(
         "MlpPolicy",
         env,
         policy_kwargs=policy_kwargs,
         verbose=1,
-        learning_rate=3e-4,
+
+        # --- ZMIANY ---
+        learning_rate=1e-4,  # Wolniej i dokładniej
+        ent_coef=0.03,  # WYSOKA entropia = Lek na Zombie (wymusza eksplorację)
+        clip_range=0.1,  # Ostrożniejsza aktualizacja wag
+        n_epochs=4,  # Mniej epok = mniejszy overfitting
+        # --------------
+
         n_steps=2048,
-        batch_size=128,
-        n_epochs=10,
+        batch_size=2048,  # Duży batch dla RTX 5070 Ti
         gamma=0.99,
         gae_lambda=0.95,
-        clip_range=0.2,
         device=device,
         tensorboard_log=LOG_DIR
     )
@@ -59,7 +64,7 @@ def main():
     checkpoint_callback = CheckpointCallback(
         save_freq=50_000,
         save_path=MODEL_DIR,
-        name_prefix="titan_transformer"
+        name_prefix="titan_fix"
     )
 
     TOTAL_STEPS = 5_000_000
