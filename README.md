@@ -1,3 +1,17 @@
+# ARCHIVED (Public Mirror)
+
+As of March 24, 2026, active development has been moved to a separate private repository.
+This public repository is now kept as an archive/reference snapshot.
+
+What this means:
+- no new feature development will be pushed here,
+- active branches used for ongoing work are removed from this public repo,
+- history remains available for reference.
+
+If you need access to current development status, contact the repository owner.
+
+---
+
 Titan (Alpha Version)
 Titan is an advanced, experimental stock scanning system designed for the S&P 500. It leverages Deep Reinforcement Learning to identify potential market opportunities by processing a complex fusion of technical indicators and fundamental growth metrics.
 
